@@ -14,11 +14,13 @@ void my_seidel(int n, int T, double *A)
     double* B = (double*)malloc(n * n * sizeof(double));
     memcpy(B, A, n * n * sizeof(double));
 
-    int block = 3, numsblock = (n-2 + block - 1) / block;
+    int block = 16, numsblock = (n-2 + block - 1) / block;
 
+    #pragma omp parallel num_threads(32)
     {
         for (int step = 0; step < numsblock + 2*(T - 1); step++) {
             // 处理每个分块
+            #pragma omp for schedule(static)
             for (int b = (step%2); b < numsblock; b+=2) {
                 // 计算第几次迭代
                 int t = (step - b) / 2;
