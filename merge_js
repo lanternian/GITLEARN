@@ -1,0 +1,57 @@
+Try to merge js branch with rebase cmd
+
+刚开始把master rebase到js上了。。。。
+
+使用 ORIG_HEAD 快速撤销
+Git 在执行危险操作前会自动保存原始状态到 ORIG_HEAD：
+```
+git reset --hard ORIG_HEAD
+```
+```
+git checkout js
+git rebase master
+```
+结果
+```
+* 1b59d9e (HEAD -> js) 记录rebase删除hello.python的提交和合并python的提交
+* 63dfdf7 添加 traced.js 和 tutorial.js 文件，演示花朵图案打印和简单的发布/订阅模式实现
+* ef249f4 添加 hello.js 文件，演示基本的 JavaScript 概念
+* 2b851a6 (master) 尝试使用rebase命令合并js分支
+```
+
+js在master之前，你需要再
+`checkout master，rebase js` 或者直接`git checkout master, git merge`
+将master移动到最前面。
+
+但如果你master rebase js，头部是master，base就变成了js了，你之前merge python那段就没了。
+
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+
+让分支变成线性，减少后续合并冲突的可能。
+但是增加过来的提交其实是复制过来的，哈希号不同了。
+
+```
+1b59d9e (HEAD -> js) HEAD@{0}: rebase (finish): returning to refs/heads/js
+1b59d9e (HEAD -> js) HEAD@{1}: rebase (pick): 记录rebase删除hello.python的提交和合并python的提交   
+63dfdf7 HEAD@{2}: rebase (pick): 添加 traced.js 和 tutorial.js 文件，演示花朵图案打印和简单的发布/ 
+订阅模式实现
+ef249f4 HEAD@{3}: rebase (pick): 添加 hello.js 文件，演示基本的 JavaScript 概念
+2b851a6 (master) HEAD@{4}: rebase (start): checkout master
+7c357bb HEAD@{5}: checkout: moving from master to js
+2b851a6 (master) HEAD@{6}: commit (amend): 尝试使用rebase命令合并js分支
+7d1b50b HEAD@{7}: reset: moving to ORIG_HEAD
+ab92778 HEAD@{8}: rebase (finish): returning to refs/heads/master
+ab92778 HEAD@{9}: rebase (pick): 尝试使用rebase命令合并js分支
+bad4e00 HEAD@{10}: rebase (pick): 添加基本的Python功能示例
+8d34d08 HEAD@{11}: rebase (pick): python says hello
+7c357bb HEAD@{12}: rebase (start): checkout js
+7d1b50b HEAD@{13}: reset: moving to HEAD
+7d1b50b HEAD@{14}: checkout: moving from js to master
+7c357bb HEAD@{15}: commit (amend): 记录rebase删除hello.python的提交和合并python的提交
+```
+
+git checkout HEAD@{6}过去看看旧的js。

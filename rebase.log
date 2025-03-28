@@ -1,0 +1,48 @@
+```git
+PS D:\program\GITLEARN> git log --oneline
+0de638b (HEAD -> js) 添加 traced.js 和 tutorial.js 文件，演示花朵图案打印和简单的发布/订阅模式实现 
+5354d0e 添加 hello.js 文件，演示基本的 JavaScript 概念
+af495fe Merge branch 'python'
+58d7a95 python says hello
+24f0c38 缓存优化
+e363760 多线程，试验出行块大小16，线程数32
+247fe34 流水线(推迟两步)
+ded5c7d 行分块
+e161251 双数组交替减少读写竞争
+ff33a90 源代码
+PS D:\program\GITLEARN> git rebase -i 24f0c38
+Successfully rebased and updated refs/heads/js.
+PS D:\program\GITLEARN> git log --oneline
+453356c (HEAD -> js) 添加 traced.js 和 tutorial.js 文件，演示花朵图案打印和简单的发布/订阅模式实现 
+66b90b0 添加 hello.js 文件，演示基本的 JavaScript 概念
+24f0c38 缓存优化
+e363760 多线程，试验出行块大小16，线程数32
+247fe34 流水线(推迟两步)
+ded5c7d 行分块
+e161251 双数组交替减少读写竞争
+ff33a90 源代码
+PS D:\program\GITLEARN> git rebase -i 24f0c38
+Successfully rebased and updated refs/heads/js.
+```
+
+af495fe Merge branch 'python'
+58d7a95 python says hello
+这两个提交其实是从master继承过来的，我先前已经在master尝试过撤销和python的merge，现在我转到js还是有先前的merge python的提交，我不想要python，所以我采用rebase来进行pick和drop。
+这个时候文件夹里没python了，如果你要找回，需要去找reflog了，毕竟有提交
+```
+453356c HEAD@{1}: rebase (finish): returning to refs/heads/js
+453356c HEAD@{2}: rebase (start): checkout 24f0c38
+453356c HEAD@{3}: rebase (finish): returning to refs/heads/js
+453356c HEAD@{4}: rebase (pick): 添加 traced.js 和 tutorial.js 文件，演示花朵图案打印和简单的发布/ 
+订阅模式实现
+66b90b0 HEAD@{5}: rebase (pick): 添加 hello.js 文件，演示基本的 JavaScript 概念
+24f0c38 HEAD@{6}: rebase (start): checkout 24f0c38
+0de638b HEAD@{7}: checkout: moving from master to js
+```
+
+想回去git reset --hard HEAD@{7}就好了，
+
+但是我又要保存当前学习rebase的记录，
+所以分离头部，git checkout HEAD@{7}去看看，再切回本分支就好了。
+
+这样我们就提供了一个纯js分支，准备合并到master
