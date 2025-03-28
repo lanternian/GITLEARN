@@ -1,0 +1,9 @@
+Try to merge js branch with rebase cmd
+
+刚开始把master rebase到js上了。。。。
+
+使用 ORIG_HEAD 快速撤销
+Git 在执行危险操作前会自动保存原始状态到 ORIG_HEAD：
+```
+git reset --hard ORIG_HEAD
+```
