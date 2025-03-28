@@ -1,0 +1,11 @@
+git reset --soft HEAD^
+
+撤销提交但保留代码更改在暂存区
+允许您重新整理提交内容或修改提交信息
+不会丢失代码更改，只是回退提交记录
+
+git commit -c ORIG_HEAD，ORIG_HEAD会记录你上一个HEAD的提交信息。
+
+总之reset是一个版本回退工具，挺危险的。
+
+多commit，commit的信息就算在分支找不到，也可以通过reflog找哈希值给他找回来。

@@ -1,11 +1,14 @@
 import math
 import random
 
+
+=======
 # This script demonstrates basic Python concepts and functionality.
 
 # Import necessary libraries
 
 # Function to calculate the factorial of a number
+
 def calculate_factorial(n):
     if n < 0:
         return "Factorial not defined for negative numbers"

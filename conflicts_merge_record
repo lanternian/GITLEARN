@@ -1,0 +1,47 @@
+PS D:\program\GITLEARN> git merge trial_of_reset
+Auto-merging hello.py
+CONFLICT (add/add): Merge conflict in hello.py
+Automatic merge failed; fix conflicts and then commit the result.
+PS D:\program\GITLEARN> git status
+On branch Complex
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Changes to be committed:
+        new file:   TRY_SOFT_RESET
+        modified:   seidel.cpp
+        new file:   tutorial.py
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both added:      hello.py
+
+这时候的hello.py文件他会变成这样：
+```
+<<<<<<< HEAD
+#include <iostream>
+using namespace std;
+int main(){
+    cout << "hello " << endl;
+}
+=======
+print("Hello, World!")
+a, b = map(int, input().split())
+print(a+b)
+>>>>>>> trial_of_reset
+```
+我们需要手动解决冲突，并暂存，然后提交
+```
+# 添加已解决的文件
+git add hello.py
+
+# 完成合并提交
+git commit
+```
+
+其他有用的命令
+查看具体冲突
+```
+git diff
+```
