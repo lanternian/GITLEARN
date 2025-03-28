@@ -1,5 +1,3 @@
-#include <iostream>
-using namespace std;
-int main(){
-    cout << "hello " << endl;
-}
+print("Hello, World!")
+a, b = map(int, input().split())
+print(a+b)
